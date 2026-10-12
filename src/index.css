@@ -376,3 +376,15 @@ details > summary::-webkit-details-marker {
   0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
   30% { transform: translateY(-4px); opacity: 1; }
 }
+
+/* ---------- Kava: aktiivse etapi riba täitub ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .bar-run {
+    transform-origin: left;
+    animation: bar-run var(--dur, 2500ms) linear forwards;
+  }
+}
+@keyframes bar-run {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}

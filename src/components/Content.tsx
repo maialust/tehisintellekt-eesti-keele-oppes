@@ -1,5 +1,7 @@
 import { CircleCheck, Clock, Gift, GraduationCap, ScanSearch, Smartphone, UserRound } from "lucide-react";
+import { useMemo, useRef } from "react";
 import { about, outcomes, schedule, topics, workshop, type IconKey } from "../data/workshop";
+import { useStepCycle } from "./useStepCycle";
 import { RegisterButton } from "./Buttons";
 import { SectionHeading } from "./SectionHeading";
 
@@ -104,14 +106,28 @@ export function Topics() {
 }
 
 /* ---------------------------------------------------------------------
- * Kava
+ * Kava — esiletõst liigub etapist etappi; pikem etapp püsib kauem.
+ * Hiire, fookuse või puudutusega jääb valitud etapp esile.
  * ------------------------------------------------------------------- */
 export function Schedule() {
-  const total = toMin(schedule[schedule.length - 1].end) - toMin(schedule[0].start);
-  const longest = Math.max(...schedule.map((s) => toMin(s.end) - toMin(s.start)));
+  const sectionRef = useRef<HTMLElement>(null);
+  const steps = useMemo(
+    () => schedule.map((s) => ({ ...s, mins: toMin(s.end) - toMin(s.start) })),
+    [],
+  );
+  const durations = useMemo(() => steps.map((s) => 1800 + s.mins * 110), [steps]);
+  const total = steps.reduce((sum, s) => sum + s.mins, 0);
+  const longest = Math.max(...steps.map((s) => s.mins));
+
+  const { active, setActive, setPaused, running } = useStepCycle(durations, sectionRef);
+  const focusStep = (i: number) => {
+    setActive(i);
+    setPaused(true);
+  };
+  const release = () => setPaused(false);
 
   return (
-    <section id="kava" aria-labelledby="kava-title" className="px-3 py-20 sm:px-6 sm:py-28">
+    <section id="kava" ref={sectionRef} aria-labelledby="kava-title" className="px-3 py-20 sm:px-6 sm:py-28">
       <div className="on-dark relative isolate mx-auto max-w-7xl overflow-hidden rounded-[2.25rem] bg-navy-900 px-6 py-14 text-white sm:px-12 sm:py-20">
         <div className="bg-grid absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_75%)]" />
         <div className="absolute -top-24 -right-24 -z-10 size-[24rem] rounded-full bg-violet-500/30 blur-[100px]" aria-hidden="true" />
@@ -127,38 +143,87 @@ export function Schedule() {
             </h2>
           </div>
 
-          <ol className="mt-10 space-y-3">
-            {schedule.map((s, i) => {
-              const mins = toMin(s.end) - toMin(s.start);
-              const main = mins === longest;
-              return (
-                <li
+          {/* ajariba: iga lõigu laius vastab etapi kestusele */}
+          <div className="reveal mt-10" aria-hidden="true">
+            <div className="flex h-3 gap-1">
+              {steps.map((s, i) => (
+                <div
                   key={s.start}
-                  className={`reveal grid grid-cols-[auto_1fr] items-center gap-x-5 gap-y-2 rounded-2xl px-5 py-4 ring-1 sm:grid-cols-[8.5rem_1fr_11rem] ${
-                    main ? "bg-white/[0.12] ring-sun-400/60" : "bg-white/[0.05] ring-white/10"
-                  }`}
-                  style={{ ["--delay" as string]: `${i * 60}ms` }}
+                  className="relative overflow-hidden rounded-full bg-white/10"
+                  style={{ flexGrow: s.mins, flexBasis: 0 }}
                 >
-                  <span className="font-bold text-sun-300 tabular-nums">
-                    {s.start}–{s.end}
-                  </span>
-                  <span className={`text-lg leading-snug font-bold ${main ? "text-white" : "text-navy-100"}`}>{s.title}</span>
-                  <span className="col-span-2 flex items-center gap-3 sm:col-span-1">
-                    <span className="h-2 flex-1 overflow-hidden rounded-full bg-white/10" aria-hidden="true">
-                      <span
-                        className={`block h-full rounded-full ${main ? "bg-gradient-to-r from-coral-400 to-sun-400" : "bg-white/40"}`}
-                        style={{ width: `${(mins / longest) * 100}%` }}
-                      />
+                  <div
+                    className={`absolute inset-0 rounded-full transition-colors duration-500 ${
+                      i < active ? "bg-white/45" : i === active ? "bg-gradient-to-r from-coral-400 to-sun-400" : ""
+                    }`}
+                  />
+                </div>
+              ))}
+            </div>
+            <div className="mt-2 flex text-xs font-semibold text-navy-100 tabular-nums">
+              {steps.map((s, i) => (
+                <span key={s.start} className="min-w-0 overflow-hidden" style={{ flexGrow: s.mins, flexBasis: 0 }}>
+                  {s.mins >= 7 || i === 0 ? s.start : ""}
+                </span>
+              ))}
+              <span className="shrink-0">{workshop.end}</span>
+            </div>
+          </div>
+
+          <ol className="mt-8 space-y-3" onMouseLeave={release}>
+            {steps.map((s, i) => {
+              const on = i === active;
+              const done = i < active;
+              return (
+                <li key={s.start} className="reveal" style={{ ["--delay" as string]: `${i * 60}ms` }}>
+                  <div
+                    tabIndex={0}
+                    aria-current={on ? "step" : undefined}
+                    onMouseEnter={() => focusStep(i)}
+                    onFocus={() => focusStep(i)}
+                    onBlur={release}
+                    onClick={() => focusStep(i)}
+                    className={`grid cursor-default grid-cols-[auto_1fr] items-center gap-x-5 gap-y-2 rounded-2xl px-5 py-4 ring-1 transition-all duration-500 sm:grid-cols-[8.5rem_1fr_11rem] ${
+                      on
+                        ? "bg-white/[0.14] shadow-[0_0_36px_-6px_rgb(248_184_24/0.45)] ring-sun-400/70"
+                        : "bg-white/[0.05] ring-white/10 hover:bg-white/[0.09]"
+                    }`}
+                  >
+                    <span className={`font-bold tabular-nums transition-colors duration-500 ${on ? "text-sun-300" : "text-sun-300/70"}`}>
+                      {s.start}–{s.end}
                     </span>
-                    <span className="flex w-[4.5rem] shrink-0 items-center justify-end gap-1 text-sm font-semibold whitespace-nowrap text-navy-100 tabular-nums">
-                      <Clock className="size-3.5" aria-hidden="true" />
-                      {mins} min
+                    <span
+                      className={`text-lg leading-snug font-bold transition-colors duration-500 ${
+                        on ? "text-white" : done ? "text-navy-100/80" : "text-navy-100"
+                      }`}
+                    >
+                      {s.title}
                     </span>
-                  </span>
+                    <span className="col-span-2 flex items-center gap-3 sm:col-span-1">
+                      <span className="relative h-2 flex-1 overflow-hidden rounded-full bg-white/10" aria-hidden="true">
+                        <span className="absolute inset-y-0 left-0 rounded-full" style={{ width: `${(s.mins / longest) * 100}%` }}>
+                          {on ? (
+                            <span
+                              key={`run-${i}-${running}`}
+                              className={`block h-full rounded-full bg-gradient-to-r from-coral-400 to-sun-400 ${running ? "bar-run" : ""}`}
+                              style={{ ["--dur" as string]: `${durations[i]}ms` }}
+                            />
+                          ) : (
+                            <span className={`block h-full rounded-full ${done ? "bg-white/45" : "bg-white/25"}`} />
+                          )}
+                        </span>
+                      </span>
+                      <span className="flex w-[4.5rem] shrink-0 items-center justify-end gap-1 text-sm font-semibold whitespace-nowrap text-navy-100 tabular-nums">
+                        <Clock className="size-3.5" aria-hidden="true" />
+                        {s.mins} min
+                      </span>
+                    </span>
+                  </div>
                 </li>
               );
             })}
           </ol>
+          <p className="reveal mt-5 text-sm text-navy-100">Vii hiir etapile või puuduta seda, et see esile jääks.</p>
         </div>
       </div>
     </section>
