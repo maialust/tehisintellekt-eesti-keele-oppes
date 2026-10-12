@@ -119,7 +119,7 @@ export function Schedule() {
   const total = steps.reduce((sum, s) => sum + s.mins, 0);
   const longest = Math.max(...steps.map((s) => s.mins));
 
-  const { active, setActive, setPaused, running } = useStepCycle(durations, sectionRef);
+  const { active, setActive, setPaused, running, reduced } = useStepCycle(durations, sectionRef);
   const focusStep = (i: number) => {
     setActive(i);
     setPaused(true);
@@ -205,7 +205,7 @@ export function Schedule() {
                           {on ? (
                             <span
                               key={`run-${i}-${running}`}
-                              className={`block h-full rounded-full bg-gradient-to-r from-coral-400 to-sun-400 ${running ? "bar-run" : ""}`}
+                              className={`block h-full rounded-full bg-gradient-to-r from-coral-400 to-sun-400 ${running && !reduced ? "bar-run" : ""}`}
                               style={{ ["--dur" as string]: `${durations[i]}ms` }}
                             />
                           ) : (
