@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Maia Lust//Tootuba//ET
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:tehisintellekt-eesti-keele-oppes-20261128@maialust.github.io
+DTSTAMP:20261012T120000Z
+DTSTART:20261128T130000Z
+DTEND:20261128T135000Z
+SUMMARY:Töötuba: Tehisintellekt täiskasvanute eesti keele õppes
+LOCATION:Park Inn by Radisson Meriton Conference & Spa Hotel\, Toompuiestee 27 / Paldiski mnt 4\, 10149 Tallinn
+DESCRIPTION:Läbiviija Maia Lust. Võta kaasa nutitelefon või sülearvuti.\nhttps://maialust.github.io/tehisintellekt-eesti-keele-oppes/
+URL:https://maialust.github.io/tehisintellekt-eesti-keele-oppes/
+END:VEVENT
+END:VCALENDAR
