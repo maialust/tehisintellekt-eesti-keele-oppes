@@ -35,7 +35,7 @@ export const workshop = {
   name: "Tehisintellekt täiskasvanute eesti keele õppes",
   type: "Töötuba",
   event: "25 aastat eesti keelt teise keelena õpetades – lood, kogemused ja tulevikutee",
-  eventShort: "25 aastat eesti keelt teise keelena õpetades",
+  eventShort: "EKTKÕLi juubelikonverents",
   organizer: "Eesti Keele kui Teise Keele Õpetajate Liit",
   // Logofailid kaustas public/.
   organizerLogo: "ektkol-logo.png", // logo koos tekstiga (päis, jalus)
@@ -58,7 +58,7 @@ export const workshop = {
     "https://www.google.com/maps/search/?api=1&query=Park+Inn+by+Radisson+Meriton+Conference+%26+Spa+Hotel%2C+Toompuiestee+27%2C+Tallinn",
 
   bring: "Palume võtta kaasa nutitelefon või sülearvuti.",
-  takeaway: "Valmis promptid, mida saab kohe oma tundides kasutada.",
+  takeaway: "Oma prompt järgmiseks tunniks.",
 };
 
 /* ---------------------------------------------------------------------
@@ -73,7 +73,8 @@ export const facilitator = {
     "eesti keele kui teise keele õpetaja",
   ],
   photo: "maia-lust.jpg",
-  profile: "https://www.etis.ee/CV/Maia_Lust/est",
+  profile: "https://www.etis.ee/CV/Maia_Lust/est/",
+  orcid: "https://orcid.org/0000-0003-2453-5563",
   // Meisterõpetaja portfoolio. Tühjaks jäetuna ei kuvata.
   portfolio: "https://sites.google.com/pae.tln.edu.ee/mlmeister/",
 };
@@ -103,63 +104,50 @@ export const rotatingRoles = [
   "õppematerjali koostajat",
 ];
 
-/** Kaks vaatenurka: õppija ja koolitaja. */
-export const perspectives = [
+/** Töötoa kirjeldus (plokk „Töötoast“). */
+export const about = [
+  "Töötoas proovime praktiliselt, kuidas luua tehisaru abil personaalseid harjutusi, kasutada seda vestluspartnerina, kohandada tekste õppija tasemele, harjutada sõnavara, anda tagasisidet ja koostada õppematerjale.",
+  "Sama oluline on kriitiline pool: arutame, mida tehisaru oskab ja mida peab jätkuvalt tegema õpetaja.",
+];
+
+/** Töötoa järel osaleja … */
+export const outcomes = [
+  "oskab koostada prompti, mis arvestab õppija keeleoskustaset ja vajadusi",
+  "teab, kuidas tehisaru saab toetada õppija iseseisvat harjutamist",
+  "oskab kasutada tehisaru õppematerjalide loomisel ja tekstide kohandamisel",
+  "oskab tehisaru väljundit kriitiliselt hinnata",
+];
+
+export type IconKey = "learner" | "teacher" | "critical";
+
+/** Teemad kolmes rühmas. */
+export const topics: { icon: IconKey; title: string; items: string[] }[] = [
   {
-    title: "Õppija iseseisev keeleõpe",
-    text: "Täiskasvanud õppija harjutab sageli üksi, oma tempos ja oma ajal. Tehisaru võib olla talle vestluspartner ja harjutuste allikas ka siis, kui õpetajat pole kõrval.",
+    icon: "learner",
+    title: "Õppija iseseisev õpe",
+    items: ["Tehisaru kui vestluspartner", "Personaalsed harjutused", "Sõnavara harjutamine õppija enda töövaldkonna põhjal"],
   },
   {
+    icon: "teacher",
     title: "Koolitaja töö",
-    text: "Koolitaja saab tehisaru abil kiiremini koostada harjutusi ja õppematerjale ning kohandada tekste oma õppijate tasemele.",
+    items: ["Teksti kohandamine õppija tasemele", "Õppematerjalide loomine", "Tagasiside õppija kirjutisele"],
+  },
+  {
+    icon: "critical",
+    title: "Kriitiline vaade",
+    items: ["Kui hästi oskab tehisaru eesti keelt?", "Mida teeb tehisaru ja mida õpetaja?", "Õppija andmete kaitse"],
   },
 ];
 
-export type IconKey = "sparkles" | "messages" | "sliders" | "book" | "check" | "file";
-
-/** Mida töötoas praktiliselt proovime. */
-export const activities: { icon: IconKey; title: string; text: string }[] = [
-  {
-    icon: "sparkles",
-    title: "Personaalsed harjutused",
-    text: "Loome tehisaru abil harjutusi, mis lähtuvad konkreetse õppija vajadustest.",
-  },
-  {
-    icon: "messages",
-    title: "Vestluspartner",
-    text: "Proovime, kuidas kasutada tehisaru vestluspartnerina eesti keele harjutamisel.",
-  },
-  {
-    icon: "sliders",
-    title: "Tekst õppija tasemele",
-    text: "Kohandame teksti nii, et see sobiks õppija keeleoskuse tasemega.",
-  },
-  {
-    icon: "book",
-    title: "Sõnavara harjutamine",
-    text: "Vaatame, kuidas tehisaru abil sõnavara harjutada.",
-  },
-  {
-    icon: "check",
-    title: "Tagasiside",
-    text: "Proovime, kuidas tehisaru saab õppijale tagasisidet anda.",
-  },
-  {
-    icon: "file",
-    title: "Õppematerjalid",
-    text: "Koostame tehisaru abil õppematerjale oma tundide jaoks.",
-  },
+/** Kava. Kellaajad kujul TT:MM. */
+export const schedule: { start: string; end: string; title: string }[] = [
+  { start: "15:00", end: "15:05", title: "Sissejuhatus ja küsitlus" },
+  { start: "15:05", end: "15:13", title: "Mida tehisaru eesti keeles oskab?" },
+  { start: "15:13", end: "15:33", title: "Praktiline töö kahel rajal" },
+  { start: "15:33", end: "15:40", title: "Tulemuste jagamine" },
+  { start: "15:40", end: "15:47", title: "Mida oskab tehisaru ja mida teeb õpetaja?" },
+  { start: "15:47", end: "15:50", title: "Oma prompt järgmiseks tunniks" },
 ];
-
-export const estonianCheck = {
-  title: "Kui hästi saavad suured keelemudelid eesti keelega hakkama?",
-  text: "Vaatame ka seda, kui hästi tulevad suured keelemudelid toime eesti keelega.",
-};
-
-export const critical = {
-  title: "Mida oskab tehisaru ja mida peab jätkuvalt tegema õpetaja?",
-  text: "Sama oluline kui praktiline pool on kriitiline pool. Arutame koos, kus on tehisaru võimaluste piir ja milline osa keeleõppest jääb õpetajale.",
-};
 
 /* ---------------------------------------------------------------------
  * KKK — vasta ainult teadaoleva info põhjal.
@@ -171,7 +159,7 @@ export const faq: { q: string; a: string }[] = [
   },
   {
     q: "Mis üritusega on tegu?",
-    a: "Töötuba toimub ürituse „25 aastat eesti keelt teise keelena õpetades – lood, kogemused ja tulevikutee“ raames. Üritus on osa Eesti Keele kui Teise Keele Õpetajate Liidu 25. juubeliaastast.",
+    a: "Töötuba toimub Eesti Keele kui Teise Keele Õpetajate Liidu (EKTKÕL) juubelikonverentsil „25 aastat eesti keelt teise keelena õpetades – lood, kogemused ja tulevikutee“.",
   },
   {
     q: "Mida peaks kaasa võtma?",
@@ -179,11 +167,11 @@ export const faq: { q: string; a: string }[] = [
   },
   {
     q: "Mida töötoast kaasa saab?",
-    a: "Valmis promptid, mida saab kohe oma tundides kasutada.",
+    a: "Töötoa lõpus koostad oma prompti, mida saad kasutada järgmises tunnis.",
   },
   {
     q: "Kas töötuba on praktiline?",
-    a: "Jah. Proovime koos luua personaalseid harjutusi, kasutada tehisaru vestluspartnerina, kohandada tekste õppija tasemele, harjutada sõnavara, anda tagasisidet ja koostada õppematerjale. Arutame ka, mida tehisaru oskab ja mida peab jätkuvalt tegema õpetaja.",
+    a: "Jah. Suurem osa ajast (20 minutit) on praktiline töö kahel rajal: õppija iseseisev õpe ja koolitaja töö. Seejärel jagame tulemusi ja arutame, mida oskab tehisaru ja mida teeb õpetaja.",
   },
   {
     q: "Kui pikk on töötuba?",
@@ -200,5 +188,5 @@ export const seo = {
     "Praktiline töötuba eesti keele õpetajatele ja koolitajatele: kuidas kasutada tehisaru harjutuste, vestluse, tekstide kohandamise, sõnavara, tagasiside ja õppematerjalide jaoks. 28.11.2026 Tallinnas.",
   ogTitle: "Tehisintellekt täiskasvanute eesti keele õppes",
   ogDescription:
-    "Töötuba 28.11.2026 kell 15:00–15:50, Tallinn. Läbiviija Maia Lust. Kaasa saad valmis promptid oma tundideks.",
+    "EKTKÕLi juubelikonverentsi töötuba 28.11.2026 kell 15:00–15:50, Tallinn. Läbiviija Maia Lust.",
 };

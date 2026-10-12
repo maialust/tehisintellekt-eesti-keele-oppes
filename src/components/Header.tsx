@@ -5,8 +5,8 @@ import { RegisterButton } from "./Buttons";
 
 export const nav = [
   { href: "#tootoast", label: "Töötoast" },
-  { href: "#proovime", label: "Mida proovime" },
-  { href: "#kaasa", label: "Kaasa" },
+  { href: "#teemad", label: "Teemad" },
+  { href: "#kava", label: "Kava" },
   { href: "#labiviija", label: "Läbiviija" },
   { href: "#info", label: "Aeg ja koht" },
   { href: "#kkk", label: "KKK" },

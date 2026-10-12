@@ -1,7 +1,7 @@
 import { useReveal } from "./hooks/useReveal";
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
-import { About, Activities, Critical, Takeaway } from "./components/Content";
+import { About, Schedule, Takeaway, Topics } from "./components/Content";
 import { Facilitator, Info, Faq, FinalCta, Footer } from "./components/Practical";
 import { MobileCta } from "./components/MobileCta";
 
@@ -20,8 +20,8 @@ export default function App() {
       <main id="sisu" tabIndex={-1} className="outline-none">
         <Hero />
         <About />
-        <Activities />
-        <Critical />
+        <Topics />
+        <Schedule />
         <Takeaway />
         <Facilitator />
         <Info />

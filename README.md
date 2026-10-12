@@ -1,6 +1,6 @@
 # Tehisintellekt täiskasvanute eesti keele õppes — töötoa leht
 
-Tutvustusleht Maia Lusti töötoale, mis toimub **28.11.2026 kell 15:00–15:50** Tallinnas, Park Inn by Radisson Meriton Conference & Spa Hotelis. Töötuba on osa üritusest „25 aastat eesti keelt teise keelena õpetades – lood, kogemused ja tulevikutee“ (Eesti Keele kui Teise Keele Õpetajate Liidu 25. juubeliaasta).
+Tutvustusleht Maia Lusti töötoale, mis toimub **28.11.2026 kell 15:00–15:50** Tallinnas, Park Inn by Radisson Meriton Conference & Spa Hotelis. Töötuba toimub Eesti Keele kui Teise Keele Õpetajate Liidu (EKTKÕL) juubelikonverentsil „25 aastat eesti keelt teise keelena õpetades – lood, kogemused ja tulevikutee“.
 
 Leht: https://maialust.github.io/tehisintellekt-eesti-keele-oppes/
 
@@ -15,7 +15,8 @@ GitHubis: ava fail → pliiatsi ikoon („Edit this file“) → muuda → **Com
 | Kuupäev ja kellaaeg | `date`, `start`, `end` ning kalendri jaoks `startUtc`, `endUtc` |
 | Koht | `venue`, `address`, `mapUrl` |
 | Läbiviija andmed | `facilitator` |
-| Töötoa tekstid | `leadQuestion`, `perspectives`, `activities`, `critical` |
+| Töötoa tekstid | `leadQuestion`, `about`, `outcomes`, `topics` |
+| Kava | `schedule` |
 | KKK | `faq` |
 
 Kui kuupäev või kellaaeg muutub, muuda ka faili `public/tootuba-28-11-2026.ics` (nupp „Lisa kalendrisse“).

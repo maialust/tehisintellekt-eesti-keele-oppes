@@ -60,7 +60,19 @@ export function Facilitator() {
                   rel="noopener"
                   className="inline-flex items-center gap-1.5 text-sm font-bold text-violet-700 underline-offset-4 hover:text-navy-900 hover:underline"
                 >
-                  ETIS-e profiil
+                  ETIS
+                  <ArrowUpRight className="size-4" aria-hidden="true" />
+                  <span className="sr-only"> (avaneb uues aknas)</span>
+                </a>
+              )}
+              {facilitator.orcid && (
+                <a
+                  href={facilitator.orcid}
+                  target="_blank"
+                  rel="noopener"
+                  className="inline-flex items-center gap-1.5 text-sm font-bold text-violet-700 underline-offset-4 hover:text-navy-900 hover:underline"
+                >
+                  ORCID
                   <ArrowUpRight className="size-4" aria-hidden="true" />
                   <span className="sr-only"> (avaneb uues aknas)</span>
                 </a>
@@ -104,7 +116,7 @@ export function Info() {
           eyebrow="Aeg ja koht"
           tone="teal"
           title="Praktiline info"
-          lead={`Töötuba toimub ürituse „${workshop.event}“ raames.`}
+          lead={`Töötuba toimub EKTKÕLi juubelikonverentsil „${workshop.event}“.`}
         />
 
         <div className="mt-12 grid gap-5 lg:grid-cols-[1fr_1.1fr]">
@@ -230,7 +242,7 @@ export function Footer() {
         <div>
           <p className="text-lg font-extrabold tracking-tight text-navy-900">{workshop.name}</p>
           <p className="mt-4 max-w-md leading-relaxed text-muted">
-            {workshop.type} ürituse „{workshop.event}“ raames. Läbiviija {facilitator.name}.
+            {workshop.type} EKTKÕLi juubelikonverentsil „{workshop.event}“. Läbiviija {facilitator.name}.
           </p>
           <p className="mt-2 text-muted">
             {workshop.date}, {workshop.start}–{workshop.end} · {workshop.address}

@@ -113,8 +113,8 @@ export function Hero() {
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
             <RegisterButton size="lg" />
-            <LinkButton href="#proovime" variant="outline" className="py-4">
-              Vaata, mida proovime
+            <LinkButton href="#kava" variant="outline" className="py-4">
+              Vaata kava
             </LinkButton>
           </div>
 
