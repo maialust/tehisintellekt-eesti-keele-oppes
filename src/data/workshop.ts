@@ -74,6 +74,8 @@ export const facilitator = {
   ],
   photo: "maia-lust.jpg",
   profile: "https://www.etis.ee/CV/Maia_Lust/est",
+  // Meisterõpetaja portfoolio. Tühjaks jäetuna ei kuvata.
+  portfolio: "https://sites.google.com/pae.tln.edu.ee/mlmeister/",
 };
 
 /* ---------------------------------------------------------------------

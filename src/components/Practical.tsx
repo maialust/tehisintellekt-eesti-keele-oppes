@@ -52,18 +52,32 @@ export function Facilitator() {
                 </li>
               ))}
             </ul>
-            {facilitator.profile && (
-              <a
-                href={facilitator.profile}
-                target="_blank"
-                rel="noopener"
-                className="mt-5 inline-flex items-center gap-1.5 text-sm font-bold text-violet-700 underline-offset-4 hover:text-navy-900 hover:underline"
-              >
-                ETIS-e profiil
-                <ArrowUpRight className="size-4" aria-hidden="true" />
-                <span className="sr-only"> (avaneb uues aknas)</span>
-              </a>
-            )}
+            <div className="mt-5 flex flex-wrap gap-x-6 gap-y-2">
+              {facilitator.profile && (
+                <a
+                  href={facilitator.profile}
+                  target="_blank"
+                  rel="noopener"
+                  className="inline-flex items-center gap-1.5 text-sm font-bold text-violet-700 underline-offset-4 hover:text-navy-900 hover:underline"
+                >
+                  ETIS-e profiil
+                  <ArrowUpRight className="size-4" aria-hidden="true" />
+                  <span className="sr-only"> (avaneb uues aknas)</span>
+                </a>
+              )}
+              {facilitator.portfolio && (
+                <a
+                  href={facilitator.portfolio}
+                  target="_blank"
+                  rel="noopener"
+                  className="inline-flex items-center gap-1.5 text-sm font-bold text-violet-700 underline-offset-4 hover:text-navy-900 hover:underline"
+                >
+                  Meisterõpetaja portfoolio
+                  <ArrowUpRight className="size-4" aria-hidden="true" />
+                  <span className="sr-only"> (avaneb uues aknas)</span>
+                </a>
+              )}
+            </div>
           </div>
         </div>
       </div>
